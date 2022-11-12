@@ -140,7 +140,7 @@ finally{
             //   uid: userInfo.user.uid,
             //   posts:[]
             // };
-setImageLink(downloadURL);
+
             // await setDoc(doc(db, "users", ), userData);
           });
         }
@@ -155,7 +155,18 @@ setImageLink(downloadURL);
           }, 2000);
         }
     }
-  
+  const handleImg=()=>{
+    
+    getDownloadURL(ref(storage, `${user.email}/Profile`))
+    .then((url) => {
+      console.log("url "+url);
+      setImageLink(url);
+      setShow(!show)
+    })
+    .catch((error) => {
+      // Handle any errors
+    });
+  }
     
   return (
     <div>
@@ -173,7 +184,7 @@ setImageLink(downloadURL);
       <input accept="image/*" type="file" onChange={(e)=>setFile(e.target.files[0])}></input>
       <button onClick={SaveImage}>Save Image</button>
       <h3>Show Image</h3>
-      <button onClick={()=>setShow(!show)}>Show Image</button>
+      <button onClick={handleImg}>Show Image</button>
       {(show==true)?
       <div>
         <h4>Image</h4>
