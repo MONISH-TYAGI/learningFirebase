@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import {useContext} from 'react'
 import { AuthContext } from '../Context/AuthContext';
@@ -8,6 +8,13 @@ export default function SignUp() {
 const [email,setEmail]=useState("");
 const [password,setPassword]=useState("");
 const {signUp}=useContext(AuthContext);
+const {user}=useContext(AuthContext);
+// useEffect(() => {
+//   if (user!=''){
+//    navigate("/home")   
+//   }
+// },[user])
+
   const goToLogin=()=>{
     navigate("/login");
   }

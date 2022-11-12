@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import {useContext} from 'react'
 import { AuthContext } from '../Context/AuthContext';
@@ -8,10 +8,17 @@ export default function Login() {
 const [email,setEmail]=useState("");
 const [password,setPassword]=useState("");
 const {login}=useContext(AuthContext);
+const {user}=useContext(AuthContext);
+// useEffect(() => {
+//   if (user!=''){
+//    navigate("/home")   
+//   }
+// },[user])
   const goToSignUp=()=>{
     navigate("/signup");
   }
 const sigingIn=async(e)=>{
+
   e.preventDefault();
   console.log("Log In");
   

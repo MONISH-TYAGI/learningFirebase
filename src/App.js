@@ -4,6 +4,7 @@ import SignUp from './Components/SignUp';
 import Home from './Components/Home';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import {AuthProvider} from './Context/AuthContext'
+import PrivateRoute from './Components/PrivateRoute';
 function App() {
   return (
     <div>
@@ -14,7 +15,14 @@ function App() {
 
         <Route  path="/login" element={<Login/>} />
         <Route  path="/signup" element={<SignUp />} />
-<Route path="/" element={<Home/>}/>
+        <Route
+  path="*"
+  element={
+    <PrivateRoute>
+      <Home />
+    </PrivateRoute>
+  }
+/>
     </Routes>
     </AuthProvider>
   </BrowserRouter>
