@@ -5,12 +5,14 @@ import Home from './Components/Home';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import {AuthProvider} from './Context/AuthContext'
 import PrivateRoute from './Components/PrivateRoute';
+import { CartContextProvider } from './Context/CartContext';
 function App() {
   return (
     <div>
       <h1>Hello App</h1>
       <BrowserRouter>
       <AuthProvider>
+        <CartContextProvider>
     <Routes>
 
         <Route  path="/login" element={<Login/>} />
@@ -24,6 +26,7 @@ function App() {
   }
 />
     </Routes>
+    </CartContextProvider>
     </AuthProvider>
   </BrowserRouter>
     </div>

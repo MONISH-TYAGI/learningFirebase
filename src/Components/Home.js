@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import {useNavigate} from 'react-router-dom'
 import { AuthContext } from '../Context/AuthContext';
 import { setDoc,doc, updateDoc,getDoc } from 'firebase/firestore';
+import { CartContext } from '../Context/CartContext';
 import {db,storage} from '../firebase'
 // import { async } from '@firebase/util';
 import {  ref,uploadBytesResumable,getDownloadURL } from "firebase/storage";
@@ -30,12 +31,18 @@ function Home() {
        
     }
     const handleReview=async()=>{
+      console.log("handle review");
       let uid= "Id"+searchNum;
       const docData={
         Name:name,
         Review:review,
         Arr:[addNum]
       };
+      console.log("docData -> ",docData);
+     dispatch({
+      type:'Print',
+      doc:docData
+     })
 // Later...
 try{
 let res=await setDoc(doc(db, "Reviews", uid), docData);
@@ -167,7 +174,18 @@ finally{
       // Handle any errors
     });
   }
-    
+   const {dispatch}=useContext(CartContext);
+   const cart=useContext(CartContext); 
+   const setObj=()=>{
+    console.log("final1"+ cart.number+ " and "+cart.word);
+    cart.number=100;
+    cart.word="change";
+    console.log("final2 "+cart.number+" and "+cart.word);
+   
+   }
+   const giveObj=()=>{
+    console.log("final3 "+cart.number+" and "+cart.word);
+   }
   return (
     <div>
       <h1> Hello Home </h1>
@@ -178,6 +196,8 @@ finally{
       <button onClick={handleReview}>Add</button>
       <button onClick={updateDoc}>Update Doc</button>
       <button onClick={updateDocEle}>Update DocElement</button>
+      <button onClick={setObj}>Set Info</button>
+      <button onClick={giveObj}>Get Info</button>
       {/* <button onClick={handleReview}>Print all</button> */}
       <button onClick={Logout}>Logout</button>
       <h1>Upload Image</h1>
