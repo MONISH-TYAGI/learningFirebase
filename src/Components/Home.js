@@ -30,7 +30,7 @@ function Home() {
        
     }
     const handleReview=async()=>{
-      let uid="Id"+searchNum;
+      let uid= "Id"+searchNum;
       const docData={
         Name:name,
         Review:review,
